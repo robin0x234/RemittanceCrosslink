@@ -1,0 +1,55 @@
+[relaychain]
+default_command = "./polkadot"
+default_args = ["--execution=wasm", "--wasm-execution=compiled", "--no-telemetry", "--no-prometheus"]
+
+chain = "rococo-local"
+
+  [[relaychain.nodes]]
+  name = "alice"
+  validator = true
+  rpc_port = 9944
+  ws_port = 9944
+
+  [[relaychain.nodes]]
+  name = "bob"
+  validator = true
+
+[types.Header]
+number = "u64"
+parent_hash = "Hash"
+post_state = "Hash"
+
+[[parachains]]
+id = 2000
+cumulus_based = true
+chain = "local"
+
+  [parachains.collator]
+  name = "usdc-collator"
+  command = "./polkadot-parachain"
+  args = ["--force-authoring", "--execution=wasm", "--wasm-execution=compiled", "--no-telemetry", "--no-prometheus"]
+  ws_port = 9988
+
+[[parachains]]
+id = 2001
+cumulus_based = true
+chain = "local"
+
+  [parachains.collator]
+  name = "php-collator"
+  command = "./polkadot-parachain"
+  args = ["--force-authoring", "--execution=wasm", "--wasm-execution=compiled", "--no-telemetry", "--no-prometheus"]
+  ws_port = 9989
+
+# HRMP Channels
+[[hrmp_channels]]
+sender = 2000
+recipient = 2001
+max_capacity = 8
+max_message_size = 512
+
+[[hrmp_channels]]
+sender = 2001
+recipient = 2000
+max_capacity = 8
+max_message_size = 512

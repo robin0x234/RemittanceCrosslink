@@ -1,0 +1,25 @@
+I have a UI-only prototype for an "Interoperable Remittance Network on Polkadot" project, built for the Polkadot Philippine Hackathon 2025, focusing on DeFi and PayFi. The app aims to enable low-cost remittances across Polkadot parachains (e.g., USDC on Parachain A to PHP-Coin on Parachain B) using XCM for cross-chain transfers, with a liquidity pool for fee earning. The current prototype, built with [insert your tool, e.g., HTML/CSS/JS, Figma, etc.], includes a basic front-end interface for sending remittances but lacks backend functionality (smart contracts, XCM integration, runtime logic). I need you to enhance the front-end and add a functional backend to create a complete MVP, aligning with the hackathon’s goals of showcasing Polkadot’s interoperability and real-world impact. Here’s what to do:
+
+Set Up a Local Testnet with Zombienet:
+Create a zombienet.toml configuration for a Polkadot relay chain with two parachains (ParaID 2000 for USDC, ParaID 2001 for PHP-Coin), using the polkadot-sdk-parachain-template (Bootcamp, Pages 112-113).
+Launch the testnet in WSL (Ubuntu) to simulate the Polkadot network.
+Implement Smart Contracts for Tokens and Liquidity Pool:
+Write a Solidity smart contract for USDC and PHP-Coin tokens on PolkaVM (Pages 10-11, 125-126), including transfer and balanceOf functions.
+Create a liquidity pool contract to manage USDC/PHP-Coin pairs, allowing users to add liquidity and earn fees (mock fee distribution).
+Deploy the contracts on each parachain using Remix with Polkadot.js (connect to parachain RPC ports, e.g., ws://127.0.0.1:9988).
+Configure XCM for Cross-Chain Transfers:
+Open HRMP channels between ParaID 2000 and 2001 (Bootcamp, Page 119).
+Write a mock XCM transfer function to send USDC from Parachain A to PHP-Coin on Parachain B (e.g., 10 USDC converts to 500 PHP-Coin at a 1:50 rate).
+Enhance the Front-End with React and Polkadot.js:
+Convert the existing UI to a React app (npx create-react-app frontend) and integrate Polkadot.js to connect to the testnet (relay chain at ws://127.0.0.1:9944).
+Improve the transaction form: dropdowns for source (USDC) and destination (PHP-Coin), input for amount, and a “Send” button that calls the XCM transfer.
+Add a transaction history section: query transfer events from the smart contracts and display in a table (Sender, Receiver, Amount, Date).
+Add Liquidity Pool Functionality in the Front-End:
+Create a section with inputs to “Add Liquidity” (USDC and PHP-Coin amounts) and a button to call the liquidity pool contract.
+Display mock “Earned Fees” (e.g., 2 USDC) and add a “Withdraw Liquidity” button.
+Polish the UI with Polkadot Branding:
+Use Polkadot’s color scheme (pink: #E6007A, white, black) and logo.
+Add a “Powered by Polkadot” badge and a mock XCM progress bar (e.g., “Initiated → Completed”).
+Prepare for Demo:
+Ensure the app can send 10 USDC from Parachain A to Parachain B, converting to 500 PHP-Coin, with a visible transaction history.
+Mock a liquidity pool interaction (add liquidity, show fees).
